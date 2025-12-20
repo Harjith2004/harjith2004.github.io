@@ -1,2 +1,15 @@
-c// Simple welcome message
-console.log("Welcome to Harjith's Portfolio");
+const sections = document.querySelectorAll('.section');
+
+function revealSections() {
+  const triggerPoint = window.innerHeight * 0.85;
+
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    if (top < triggerPoint) {
+      section.classList.add('visible');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealSections);
+revealSections();
