@@ -3,141 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Harjith | Software Developer Portfolio"/>
-  <title>Portfolio | Harjith</title>
+  <title>Harjith | Software Developer</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<header>
-  <a href="#home" class="logo"><i class="fas fa-code"></i> Harjith</a>
-  <div id="menu" class="fas fa-bars"></div>
-
-  <nav class="navbar">
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Harjith</div>
     <ul>
-      <li><a class="active" href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#work">Projects</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-</header>
 
-<!-- HOME -->
-<section class="home" id="home">
-  <div class="content">
-    <h2>Hi There 👋<br/> I'm <span>Harjith</span></h2>
-    <p>I am a <span class="typing-text"></span></p>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Harjith</h1>
+    <p class="role">Software Developer | Full Stack Enthusiast</p>
+    <p class="hero-sub">
+      I build clean, responsive, and user-focused web applications.
+    </p>
 
-    <a href="#about" class="btn">About Me</a>
-
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/harjith-k-839a55354" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/harjith40711-ship-it" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="mailto:harjithharjith40711@gmail.com"><i class="fas fa-envelope"></i></a>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn">View Projects</a>
+      <a href="Harjith_Resume.pdf" class="btn btn-outline" target="_blank">
+        Download Resume
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <h2 class="heading">About <span>Me</span></h2>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate software developer with a strong interest in full stack development.
+      I enjoy building scalable web applications and solving real-world problems using technology.
+    </p>
+  </section>
 
-  <div class="row">
-    <div class="content">
-      <h3>I'm Harjith</h3>
-      <span class="tag">Aspiring Software Developer</span>
+  <!-- SKILLS -->
+  <section id="skills" class="section light">
+    <h2>Skills</h2>
 
-      <p>
-        I am a passionate Software Developer interested in Full Stack Development.
-        I have hands-on experience in Java, Web Development, and project-based learning.
-        I won 1st prize in the Nan Mudhalvan Hackathon for my Voice Based Authentication System.
-      </p>
+    <div class="skills-container">
+      <div class="skill-card">
+        <h4>Frontend</h4>
+        <p>HTML, CSS, JavaScript, React</p>
+      </div>
 
-      <p><b>Email:</b> harjithharjith40711@gmail.com</p>
-      <p><b>Location:</b> India</p>
+      <div class="skill-card">
+        <h4>Backend</h4>
+        <p>Java, Python, Node.js</p>
+      </div>
 
-      <a href="https://drive.google.com/" target="_blank" class="btn">Download Resume</a>
+      <div class="skill-card">
+        <h4>Database & Tools</h4>
+        <p>MySQL, Git, GitHub</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS -->
-<section class="skills" id="skills">
-  <h2 class="heading">Skills</h2>
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
 
-  <div class="container">
-    <div class="bar">Java</div>
-    <div class="bar">HTML</div>
-    <div class="bar">CSS</div>
-    <div class="bar">JavaScript</div>
-    <div class="bar">React (Basics)</div>
-    <div class="bar">Git & GitHub</div>
-  </div>
-</section>
+    <div class="projects-container">
 
-<!-- PROJECTS -->
-<section class="work" id="work">
-  <h2 class="heading">Projects</h2>
+      <div class="project-card">
+        <h3>Voice Based Authentication System</h3>
+        <p>
+          Developed a secure voice-based authentication system for a healthcare portal
+          to improve login security and user verification.
+        </p>
+        <p><b>Tech:</b> Java, Machine Learning</p>
+        <a href="#" target="_blank">View on GitHub</a>
+      </div>
 
-  <div class="box-container">
+      <div class="project-card">
+        <h3>Personal Portfolio Website</h3>
+        <p>
+          Designed and developed a responsive personal portfolio website
+          to showcase skills, projects, and contact information.
+        </p>
+        <p><b>Tech:</b> HTML, CSS, JavaScript</p>
+        <a href="#" target="_blank">View on GitHub</a>
+      </div>
 
-    <div class="box">
-      <h3>Voice Based Authentication System</h3>
-      <p>Secure login system using voice recognition for healthcare portals.</p>
-      <a href="https://github.com/harjith40711-ship-it/voice-authentication-system" target="_blank" class="btn">View on GitHub</a>
+      <div class="project-card">
+        <h3>To-Do List Web Application</h3>
+        <p>
+          Built a task management web app with features like add, delete,
+          and mark tasks as completed.
+        </p>
+        <p><b>Tech:</b> JavaScript, HTML, CSS</p>
+        <a href="#" target="_blank">View on GitHub</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="box">
-      <h3>Portfolio Website</h3>
-      <p>Personal professional portfolio built using HTML, CSS and JavaScript.</p>
-      <a href="https://github.com/harjith40711-ship-it/portfolio-website" target="_blank" class="btn">View on GitHub</a>
-    </div>
+  <!-- CONTACT -->
+  <section id="contact" class="section light">
+    <h2>Contact</h2>
 
-    <div class="box">
-      <h3>To-Do List App</h3>
-      <p>Simple task management application using JavaScript.</p>
-      <a href="https://github.com/harjith40711-ship-it/todo-list-app" target="_blank" class="btn">View on GitHub</a>
-    </div>
+    <p><b>Email:</b> harjithharjith40711@gmail.com</p>
+    <p><b>LinkedIn:</b>
+      <a href="https://www.linkedin.com/in/harjith-k-839a55354" target="_blank">
+        linkedin.com/in/harjith-k-839a55354
+      </a>
+    </p>
+    <p><b>GitHub:</b>
+      <a href="https://github.com/harjith40711-ship-it" target="_blank">
+        github.com/harjith40711-ship-it
+      </a>
+    </p>
+  </section>
 
-  </div>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Harjith. All rights reserved.</p>
+  </footer>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <h2 class="heading">Contact Me</h2>
-
-  <form>
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <textarea placeholder="Your Message"></textarea>
-    <button type="submit" class="btn">Send</button>
-  </form>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <p>© 2025 Harjith | Built with ❤️</p>
-</footer>
-
-<!-- TYPING EFFECT -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-<script>
-  new Typed(".typing-text", {
-    strings: ["Software Developer", "Java Developer", "Full Stack Learner"],
-    typeSpeed: 100,
-    backSpeed: 60,
-    loop: true
-  });
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
