@@ -1,134 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Harjith | Software Developer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harjith | Portfolio</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Dark Theme (Default) */
+      --bg: #030712;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --primary: #38bdf8;
+      --secondary: #818cf8;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --header-bg: rgba(3, 7, 18, 0.85);
+      --accent-glow: rgba(56, 189, 248, 0.15);
+    }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --primary: #2563eb;
+      --secondary: #4f46e5;
+      --text-main: #0f172a;
+      --text-dim: #475569;
+      --header-bg: rgba(248, 250, 252, 0.85);
+      --accent-glow: rgba(37, 99, 235, 0.05);
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; transition: background-color 0.3s ease, color 0.3s ease; }
+
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+    /* NAVIGATION */
+    header {
+      position: fixed; width: 100%; top: 0; padding: 15px 8%;
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--header-bg); backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(128, 128, 128, 0.1); z-index: 1000;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-text { font-size: 1.3rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    nav { display: flex; align-items: center; gap: 30px; }
+    nav ul { display: flex; gap: 25px; list-style: none; }
+    nav a { text-decoration: none; color: var(--text-dim); font-weight: 500; font-size: 0.9rem; }
+    nav a:hover { color: var(--primary); }
+
+    #theme-toggle { background: none; border: 1px solid rgba(128,128,128,0.2); color: var(--text-main); padding: 8px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* HERO */
+    section { padding: 100px 8%; max-width: 1300px; margin: 0 auto; }
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%); }
+    .hero h1 { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 15px; }
+    .hero span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 600px; margin-bottom: 40px; }
+
+    .btn-group { display: flex; gap: 15px; justify-content: center; }
+    .btn { padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+    .btn-primary { background: var(--primary); color: white; box-shadow: 0 10px 20px -10px var(--primary); }
+    .btn-outline { border: 1px solid var(--text-dim); color: var(--text-main); }
+    .btn:hover { transform: translateY(-3px); }
+
+    /* ABOUT GRID */
+    .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center; }
+    .stat-card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid rgba(128,128,128,0.1); text-align: center; }
+    .stat-card h3 { color: var(--primary); font-size: 2rem; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+    .card { background: var(--card-bg); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 24px; padding: 40px; transition: 0.4s; height: 100%; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+    .tag { font-size: 0.7rem; background: rgba(56, 189, 248, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 100px; font-weight: 700; margin-right: 5px; text-transform: uppercase; }
+
+    /* SKILLS */
+    .skills-container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 30px; }
+    .skill-tag { background: var(--card-bg); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.1); font-weight: 600; font-size: 0.9rem; }
+
+    #scrollToTop { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 100; font-weight: bold; }
+
+    footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(128,128,128,0.1); }
+
+    @media (max-width: 768px) { nav ul { display: none; } section { padding: 80px 5%; } .about-grid { gap: 30px; } }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
+<header>
+  <a href="#hero" class="logo-container">
+    <svg width="35" height="35" viewBox="0 0 100 100" fill="none">
+      <rect width="100" height="100" rx="20" fill="url(#p1)" fill-opacity="0.1"/>
+      <path d="M30 30V70M70 30V70M30 50H70" stroke="url(#p1)" stroke-width="8" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="p1" x1="0" y1="0" x2="100" y2="100">
+          <stop stop-color="#38bdf8"/><stop offset="1" stop-color="#818cf8"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="logo-text">HARJITH</span>
+  </a>
   <nav>
-    <div class="logo">Harjith</div>
     <ul>
+      <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#projects">Work</a></li>
     </ul>
+    <button id="theme-toggle">
+      <svg id="theme-icon" width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      </svg>
+    </button>
   </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Harjith</h1>
-    <p class="role">Software Developer | Full Stack Enthusiast</p>
-    <p class="hero-sub">
-      I build clean, responsive, and user-focused web applications.
-    </p>
+<div id="scrollToTop">↑</div>
 
-    <div class="hero-buttons">
-      <a href="#projects" class="btn">View Projects</a>
-      <a href="Harjith_Resume.pdf" class="btn btn-outline" target="_blank">
-        Download Resume
-      </a>
+<section class="hero" id="hero">
+  <h1 data-aos="fade-down">Future <span>Architect.</span></h1>
+  <p data-aos="fade-up" data-aos-delay="200">Aspiring Software Developer specializing in Java, ML, and Full Stack solutions.</p>
+  <div class="btn-group" data-aos="fade-up" data-aos-delay="400">
+    <a href="#projects" class="btn btn-primary">My Work</a>
+    <a href="mailto:harjithharjith40711@gmail.com" class="btn btn-outline">Email Me</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div data-aos="fade-right">
+      <h2 style="text-align: left; margin-bottom: 20px;">About Me</h2>
+      <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 500;">Recent graduate passionate about building clean, secure web applications.</p>
+      <br>
+      <p style="color: var(--text-dim);">I specialize in <strong>Java Full Stack</strong> development. My approach combines technical precision with a creative mindset, allowing me to build systems that are both powerful and user-friendly.</p>
+      <br>
+      <p style="color: var(--text-dim);">My proudest achievement is leading a team to <strong>1st Place in the Nan Mudhalvan Hackathon</strong> for our Voice-Based Authentication System. I am now seeking a professional role to apply my skills to real-world challenges.</p>
+      <div style="margin-top: 30px;"><a href="Harjith_Resume.pdf" class="btn btn-primary">Download Resume</a></div>
     </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate software developer with a strong interest in full stack development.
-      I enjoy building scalable web applications and solving real-world problems using technology.
-    </p>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="section light">
-    <h2>Skills</h2>
-
-    <div class="skills-container">
-      <div class="skill-card">
-        <h4>Frontend</h4>
-        <p>HTML, CSS, JavaScript, React</p>
-      </div>
-
-      <div class="skill-card">
-        <h4>Backend</h4>
-        <p>Java, Python, Node.js</p>
-      </div>
-
-      <div class="skill-card">
-        <h4>Database & Tools</h4>
-        <p>MySQL, Git, GitHub</p>
-      </div>
+    <div class="about-stats" data-aos="fade-left" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="stat-card"><h3>1st</h3><p style="font-size: 0.7rem; color: var(--text-dim);">Hackathon Winner</p></div>
+      <div class="stat-card"><h3>5+</h3><p style="font-size: 0.7rem; color: var(--text-dim);">Core Projects</p></div>
+      <div class="stat-card"><h3>A+</h3><p style="font-size: 0.7rem; color: var(--text-dim);">Adaptability</p></div>
+      <div class="stat-card"><h3>∞</h3><p style="font-size: 0.7rem; color: var(--text-dim);">Commitment</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-    <h2>Projects</h2>
+<section id="skills" style="text-align: center;">
+  <h2 data-aos="fade-up">Technical & Soft Skills</h2>
+  <div class="skills-container" data-aos="zoom-in">
+    <div class="skill-tag">Java</div><div class="skill-tag">React.js</div><div class="skill-tag">MySQL</div>
+    <div class="skill-tag">JavaScript</div><div class="skill-tag">HTML5/CSS3</div><div class="skill-tag">Git/Github</div>
+    <div class="skill-tag" style="border-color: var(--secondary);">Problem Solving</div>
+    <div class="skill-tag" style="border-color: var(--secondary);">Agile Mindset</div>
+    <div class="skill-tag" style="border-color: var(--secondary);">Team Leadership</div>
+  </div>
+</section>
 
-    <div class="projects-container">
-
-      <div class="project-card">
-        <h3>Voice Based Authentication System</h3>
-        <p>
-          Developed a secure voice-based authentication system for a healthcare portal
-          to improve login security and user verification.
-        </p>
-        <p><b>Tech:</b> Java, Machine Learning</p>
-        <a href="#" target="_blank">View on GitHub</a>
-      </div>
-
-      <div class="project-card">
-        <h3>Personal Portfolio Website</h3>
-        <p>
-          Designed and developed a responsive personal portfolio website
-          to showcase skills, projects, and contact information.
-        </p>
-        <p><b>Tech:</b> HTML, CSS, JavaScript</p>
-        <a href="#" target="_blank">View on GitHub</a>
-      </div>
-
-      <div class="project-card">
-        <h3>To-Do List Web Application</h3>
-        <p>
-          Built a task management web app with features like add, delete,
-          and mark tasks as completed.
-        </p>
-        <p><b>Tech:</b> JavaScript, HTML, CSS</p>
-        <a href="#" target="_blank">View on GitHub</a>
-      </div>
-
+<section id="projects">
+  <h2 data-aos="fade-up">Featured Projects</h2>
+  <div class="projects-grid">
+    <div class="card" data-aos="fade-up">
+      <div style="margin-bottom: 15px;"><span class="tag">Java</span><span class="tag">Security</span></div>
+      <h3>Voice-Auth System</h3>
+      <p>A secure portal using voice biometrics for authentication. 1st Place Winner.</p>
+      <a href="https://github.com/harjith40711-ship-it/voice-authentication-system" target="_blank" class="btn-outline btn" style="padding: 8px 16px; font-size: 0.8rem; margin-top: auto; width: fit-content;">Source Code</a>
     </div>
-  </section>
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div style="margin-bottom: 15px;"><span class="tag">JS</span><span class="tag">Portfolio</span></div>
+      <h3>Premium Portfolio</h3>
+      <p>Modern developer portfolio featuring theme toggles and custom animations.</p>
+      <a href="#" class="btn-outline btn" style="padding: 8px 16px; font-size: 0.8rem; margin-top: auto; width: fit-content;">Live Demo</a>
+    </div>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section light">
-    <h2>Contact</h2>
+<footer>
+  <p>© 2025 Harjith | Powered by Passion & Code</p>
+</footer>
 
-    <p><b>Email:</b> harjithharjith40711@gmail.com</p>
-    <p><b>LinkedIn:</b>
-      <a href="https://www.linkedin.com/in/harjith-k-839a55354" target="_blank">
-        linkedin.com/in/harjith-k-839a55354
-      </a>
-    </p>
-    <p><b>GitHub:</b>
-      <a href="https://github.com/harjith40711-ship-it" target="_blank">
-        github.com/harjith40711-ship-it
-      </a>
-    </p>
-  </section>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Harjith. All rights reserved.</p>
-  </footer>
+  // THEME TOGGLE
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeIcon = document.getElementById('theme-icon');
 
-  <script src="script.js"></script>
+  themeToggle.addEventListener('click', () => {
+    const isLight = body.getAttribute('data-theme') === 'light';
+    body.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    themeIcon.innerHTML = isLight 
+      ? '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>' 
+      : '<path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>';
+  });
+
+  if(localStorage.getItem('theme') === 'light') body.setAttribute('data-theme', 'light');
+
+  // SCROLL TO TOP
+  const scrollBtn = document.getElementById("scrollToTop");
+  window.onscroll = () => scrollBtn.style.display = (window.scrollY > 500) ? "flex" : "none";
+  scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+</script>
+
 </body>
 </html>
