@@ -1,132 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harjith K | Software Developer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harjith K | Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #030014;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #a855f7;
+            --secondary: #ec4899;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-<!-- SEO -->
-<meta name="description" content="Harjith K - Aspiring Software Developer | Java | Full Stack | Portfolio">
-<meta name="keywords" content="Harjith K, Java Developer, Portfolio, Full Stack Developer">
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; scroll-behavior: smooth; }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; opacity: 0.6; }
 
-<style>
-:root{
---bg:#0b1020;
---card:#11162a;
---text:#ffffff;
---muted:#a1a1aa;
---accent:#7c3aed;
---grad:linear-gradient(135deg,#7c3aed,#ec4899);
-}
-.light{
---bg:#f8fafc;
---card:#ffffff;
---text:#0f172a;
---muted:#475569;
-}
+        header {
+            position: fixed; width: 100%; top: 0; padding: 25px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(3, 0, 20, 0.8); backdrop-filter: blur(12px); z-index: 1000;
+        }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; color: var(--primary); }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text)}
+        section { padding: 100px 10%; max-width: 1300px; margin: 0 auto; }
 
-header{
-position:fixed;top:0;width:100%;
-display:flex;justify-content:space-between;
-padding:18px 8%;background:rgba(0,0,0,.5);
-backdrop-filter:blur(12px);z-index:100;
-}
-header h1{font-size:1.3rem;background:var(--grad);-webkit-background-clip:text;color:transparent}
-nav a{margin-left:20px;color:var(--muted);text-decoration:none;font-size:.9rem}
-nav a:hover{color:#fff}
-.toggle{cursor:pointer}
+        /* Hero */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .hero h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1; margin-bottom: 20px; }
+        .hero span { color: var(--primary); text-shadow: 0 0 30px rgba(168, 85, 247, 0.5); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
 
-section{padding:100px 8%;max-width:1100px;margin:auto}
-.hero{text-align:center;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-.hero h2{font-size:clamp(2.5rem,7vw,4rem)}
-.hero span{background:var(--grad);-webkit-background-clip:text;color:transparent}
-.hero p{margin:20px 0;color:var(--muted)}
-.btn{padding:14px 28px;border-radius:30px;background:var(--grad);color:#fff;text-decoration:none;font-weight:600;display:inline-block}
+        .btn-group { display: flex; gap: 20px; }
+        .btn { padding: 14px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; cursor: pointer; display: inline-block; }
+        .btn-primary { background: var(--primary); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--border); color: var(--text); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
-.card{background:var(--card);padding:28px;border-radius:18px;margin-top:25px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+        /* Headers */
+        .section-header { margin-bottom: 60px; text-align: left; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 15px; }
 
-.tags span{display:inline-block;background:#ffffff12;padding:8px 14px;border-radius:20px;margin:6px;font-size:.85rem}
+        /* Cards Style */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        .card:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); transform: translateY(-5px); }
+        
+        /* Project Specifics */
+        .project-img { width: 100%; height: 300px; border-radius: 12px; object-fit: cover; margin-bottom: 25px; border: 1px solid var(--border); opacity: 0.9; }
+        .tag { color: var(--secondary); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
 
-footer{text-align:center;padding:30px;color:var(--muted);font-size:.8rem}
+        /* Skill Rows */
+        .skill-row { display: flex; flex-direction: column; gap: 10px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .s-tag { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 8px 18px; border-radius: 8px; font-size: 0.9rem; color: var(--primary); }
 
-@media(max-width:768px){nav{display:none}}
-</style>
+        /* Contact Form */
+        .contact-box { background: var(--card-bg); border: 1px solid var(--border); padding: 40px; border-radius: 20px; max-width: 700px; margin: 0 auto; }
+        input, textarea {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+            padding: 15px; border-radius: 8px; color: white; margin-bottom: 20px; outline: none; font-size: 1rem;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); }
+
+        footer { padding: 50px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) { section { padding: 80px 5%; } .hero h1 { font-size: 3.5rem; } .btn-group { flex-direction: column; } }
+    </style>
 </head>
-
 <body>
+
+<canvas id="bg-canvas"></canvas>
+
 <header>
-<h1>Harjith K</h1>
-<nav>
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#skills">Skills</a>
-<a href="#contact">Contact</a>
-<span class="toggle" onclick="toggleMode()">🌓</span>
-</nav>
+    <div class="logo">HARJITH.K</div>
 </header>
 
 <section class="hero">
-<h2>Hi, I’m <span>Harjith</span></h2>
-<p>Aspiring Software Developer | Java & Full Stack</p>
-<a href="#contact" class="btn">Let’s Connect</a>
+    <h1 data-aos="fade-right">Hi, I'm <span>Harjith</span></h1>
+    <p data-aos="fade-right" data-aos-delay="200">
+        Full Stack Developer Intern @ HOP Technologies. Building secure, scalable, and user-centric software solutions.
+    </p>
+    <div class="btn-group" data-aos="fade-right" data-aos-delay="400">
+        <a href="#contact" class="btn btn-primary">Let's Connect</a>
+        <a href="Harjith_Resume.pdf" class="btn btn-outline" download>Download CV</a>
+    </div>
 </section>
 
 <section id="about">
-<h2>About Me</h2>
-<div class="card">
-<p>
-I am a passionate Software Developer with hands-on experience in Java, Web Development and project-based learning.
-I won <b>1st Prize</b> in the Nan Mudhalvan Hackathon for my Voice Based Authentication System.
-</p>
-</div>
+    <div class="section-header" data-aos="fade-up">
+        <h2>About Me</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+        <p style="font-size: 1.15rem; color: var(--text-muted);">
+            Motivated Software Developer with a strong foundation in full-stack development using Java, Spring Boot, React, and SQL. 
+            I have experience building secure applications, IoT solutions, and automation-tested systems.
+        </p>
+    </div>
 </section>
 
 <section id="projects">
-<h2>Projects</h2>
-<div class="grid">
-<div class="card">
-<h3>Voice Based Authentication</h3>
-<p>Secure healthcare login using voice recognition.</p>
-</div>
-<div class="card">
-<h3>Portfolio Website</h3>
-<p>Personal responsive portfolio using HTML & CSS.</p>
-</div>
-</div>
+    <div class="section-header" data-aos="fade-up">
+        <h2>Featured Projects</h2>
+    </div>
+
+    <div class="card" data-aos="fade-up">
+        <img src="voice-auth.jpg" alt="Voice Auth" class="project-img">
+        <span class="tag">Hackathon Winner - 1st Place</span>
+        <h3>Voice-Based Authentication</h3>
+        <p style="color: var(--text-muted); margin-top: 10px;">
+            A secure authentication system for healthcare applications designed to control user access and protect sensitive patient data.
+        </p>
+    </div>
+
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <img src="iot-shelf.jpg" alt="IoT Shelf" class="project-img">
+        <span class="tag">IoT & Cloud Solution</span>
+        <h3>Retail Shelf Monitoring</h3>
+        <p style="color: var(--text-muted); margin-top: 10px;">
+            Implemented a real-time inventory tracking system using IoT sensors and cloud-based automated stock monitoring.
+        </p>
+    </div>
 </section>
 
 <section id="skills">
-<h2>Skills</h2>
-<div class="card tags">
-<span>Java</span><span>HTML</span><span>CSS</span>
-<span>JavaScript</span><span>Git & GitHub</span>
-</div>
+    <div class="section-header" data-aos="fade-up">
+        <h2>Skills & Expertise</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+        <div class="skill-row">
+            <h4 style="margin-bottom: 5px;">Languages & Frameworks</h4>
+            <div class="skill-tags">
+                <span class="s-tag">Java</span><span class="s-tag">JavaScript</span><span class="s-tag">SQL</span>
+                <span class="s-tag">Spring Boot</span><span class="s-tag">React.js</span><span class="s-tag">Node.js</span><span class="s-tag">Express.js</span>
+            </div>
+        </div>
+        <div class="skill-row" style="margin-top: 35px;">
+            <h4 style="margin-bottom: 5px;">Databases & Tools</h4>
+            <div class="skill-tags">
+                <span class="s-tag">PostgreSQL</span><span class="s-tag">MongoDB</span><span class="s-tag">Docker</span>
+                <span class="s-tag">Git</span><span class="s-tag">Playwright</span><span class="s-tag">Figma</span><span class="s-tag">Postman</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="education">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Education & Credentials</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+        <span class="tag">2022 - 2026</span>
+        <h3>B.E. Computer Science & Engineering</h3>
+        <p style="color: var(--text-muted);">A.V.C College of Engineering | <strong>CGPA: 7.23</strong></p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <span class="tag">Professional Certifications</span>
+        <ul style="color: var(--text-muted); padding-left: 20px; font-size: 0.95rem;">
+            <li>IBM: Prompt Engineering (2025)</li>
+            <li>GUVI/IIT-M: Python Programming</li>
+            <li>Simplilearn: Intro to AI</li>
+        </ul>
+    </div>
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
-<div class="card">
-<p>Email: harjithharjith40711@gmail.com</p>
-<p>
-<a href="https://github.com/Harjith2004">GitHub</a> |
-<a href="https://www.linkedin.com/in/harjith-k-839a55354">LinkedIn</a>
-</p>
-</div>
+    <div class="section-header" data-aos="fade-up" style="text-align: center;">
+        <h2>Let's Connect</h2>
+    </div>
+    <div class="contact-box" data-aos="zoom-in">
+        <form action="https://formspree.io/f/harjithharjith40711@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+        <div style="margin-top: 30px; text-align: center; border-top: 1px solid var(--border); padding-top: 20px;">
+            <a href="https://github.com/Harjith2004" target="_blank" style="color: var(--text-muted); margin: 0 15px; text-decoration: none;">GitHub</a>
+            <a href="https://www.linkedin.com/in/harjith-k-839a55354" target="_blank" style="color: var(--text-muted); margin: 0 15px; text-decoration: none;">LinkedIn</a>
+        </div>
+    </div>
 </section>
 
-<footer>© 2025 Harjith K | Built with ❤️</footer>
+<footer>
+    <p>© 2025 Harjith K. | Software Developer</p>
+</footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-function toggleMode(){
-document.body.classList.toggle("light");
-}
+    AOS.init({ duration: 1000, once: true });
+
+    // Neural Background Animation
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2;
+            this.speedX = Math.random() * 0.4 - 0.2;
+            this.speedY = Math.random() * 0.4 - 0.2;
+        }
+        update() {
+            this.x += this.speedX; this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(168, 85, 247, 0.4)';
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+    function init() { for (let i = 0; i < 100; i++) particles.push(new Particle()); }
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    init(); animate();
 </script>
 </body>
 </html>
+
