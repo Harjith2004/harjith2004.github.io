@@ -29,8 +29,8 @@
             --border-color: rgba(0, 0, 0, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; pointer-events: none; }
 
         header {
@@ -46,45 +46,41 @@
         .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 40px; text-align: center; }
         .section-title span { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center; }
-        .name-fill { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: clamp(3rem, 8vw, 5rem); }
-        .hero-subtitle { color: var(--text-muted); font-size: 1.2rem; margin-top: 10px; font-weight: 500; }
-        .hero-desc { margin: 20px auto; max-width: 700px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
-        
-        .btn-group { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
-        .btn { padding: 12px 28px; border-radius: 10px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .btn-blue { background: #00b4d8; color: #000; box-shadow: 0 0 20px rgba(0, 180, 216, 0.3); }
-        .btn-outline { border: 1px solid var(--border-color); color: var(--text-main); background: rgba(255,255,255,0.02); }
-        .btn-gradient { background: var(--gradient-text); color: #fff; }
+        .name-fill { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .hero-subtitle { display: inline-block; padding: 8px 16px; background: rgba(139, 92, 246, 0.1); color: var(--primary); border-radius: 50px; font-weight: 700; margin-bottom: 25px; border: 1px solid var(--primary); }
+        .btn-group { display: flex; gap: 15px; }
+        .btn { padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: linear-gradient(90deg, #8b5cf6, #d946ef); color: white; }
+        .btn-outline { border: 1px solid var(--border-color); color: var(--text-main); }
 
-        /* SOCIAL ICON ROW (From Screenshot) */
-        .social-row { display: flex; gap: 15px; margin-top: 30px; }
-        .social-btn { width: 45px; height: 45px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-main); text-decoration: none; background: rgba(255,255,255,0.03); transition: 0.3s; }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-        /* INFO BOXES */
-        .info-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; position: relative; }
-        .info-box label { display: block; font-size: 0.7rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
-        .info-box h4 { font-size: 1.05rem; margin-bottom: 4px; }
-        .info-box p { color: var(--text-muted); font-size: 0.85rem; }
+        /* BOX STYLE LAYOUT (EXP/EDU/CONTACT) */
+        .info-box { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        .info-box label { display: block; font-size: 0.75rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .info-box h4 { font-size: 1.1rem; margin-bottom: 4px; }
+        .info-box p { color: var(--text-muted); font-size: 0.9rem; }
 
         /* PROJECTS */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .project-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color); }
-        .project-img { width: 100%; height: 200px; background: #1e293b; }
-        .project-img img { width: 100%; height: 100%; object-fit: cover; }
+        .project-img { width: 100%; height: 200px; overflow: hidden; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .project-card:hover img { transform: scale(1.1); }
         .project-info { padding: 20px; }
 
-        /* CONTACT SECTION (Screenshot Style) */
+        /* CONTACT LAYOUT (SCREENSHOT STYLE) */
         .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .social-links { display: flex; gap: 10px; margin-top: 20px; }
+        .social-icon { width: 45px; height: 45px; border-radius: 8px; background: var(--card-bg); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-main); text-decoration: none; font-size: 1.2rem; }
+        
         .contact-form { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); }
         .form-group { position: relative; margin-bottom: 20px; }
         .form-group i { position: absolute; left: 15px; top: 18px; color: var(--text-muted); }
-        .form-input { width: 100%; padding: 15px 15px 15px 45px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-main); font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 15px 15px 15px 45px; background: rgba(0,0,0,0.1); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-main); }
         .send-btn { width: 100%; padding: 15px; background: var(--accent); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        @media (max-width: 850px) { .contact-grid { grid-template-columns: 1fr; } header { padding: 1.2rem 5%; } }
+        @media (max-width: 850px) { .contact-grid { grid-template-columns: 1fr; } .nav-center { display: none; } }
     </style>
 </head>
 <body data-theme="dark">
@@ -92,66 +88,58 @@
     <canvas id="neural"></canvas>
 
     <header>
-        <a href="#" class="logo" style="text-decoration: none;">Harjith K</a>
+        <a href="#" class="logo">Harjith.</a>
         <div class="nav-right">
             <button class="theme-toggle" id="theme-btn"><i class="fas fa-moon"></i></button>
+            <div class="hamburger" id="menu-btn"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
     <section id="home" class="hero">
         <div data-aos="zoom-in">
-            <h1><span class="name-fill">Harjith</span></h1>
             <div class="hero-subtitle">Software Engineer | Full Stack Developer</div>
-            <p class="hero-desc">B.E. Computer Science student specializing in Java, Python, and Full Stack technologies. Building scalable web applications with a passion for clean code and innovative solutions.</p>
-            
+            <h1>Hi, I'm <span class="name-fill">Harjith</span></h1>
+            <p style="margin: 20px auto; max-width: 600px; color: var(--text-muted);">Passionate developer focused on building scalable web solutions and secure systems.</p>
             <div class="btn-group">
-                <a href="#contact" class="btn btn-blue"><i class="fas fa-envelope"></i> Get In Touch</a>
-                <a href="#projects" class="btn btn-outline">View Projects</a>
-                <a href="Harjith_resume.pdf" class="btn btn-gradient" download><i class="fas fa-file-download"></i> Download CV</a>
-            </div>
-
-            <div class="social-row">
-                <a href="https://github.com/Harjith2004" class="social-btn"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/harjith-k-839a55354" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:harjithharjith40711@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+918940039606" class="social-btn"><i class="fas fa-phone"></i></a>
+                <a href="#projects" class="btn btn-primary">Projects</a>
+                <a href="Harjith_resume.pdf" class="btn btn-outline" download><i class="fas fa-download"></i> Download CV</a>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2 class="section-title">Technical <span>Skills</span></h2>
+        <h2 class="section-title">My <span>Skills</span></h2>
         <div class="projects-grid">
-            <div class="info-box" data-aos="fade-up">
+            <div class="info-box">
                 <label>Frontend</label>
-                <p>HTML5, CSS3, JavaScript, React, Angular, Tailwind CSS</p>
+                <p>HTML, CSS, JavaScript, React, Angular</p>
             </div>
-            <div class="info-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-box">
                 <label>Backend</label>
-                <p>Java, Python, Node.js, Express.js, SQL, MongoDB</p>
+                <p>Java, Python, Node.js, SQL, MongoDB</p>
             </div>
-            <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                <label>Other Tools</label>
-                <p>Git/GitHub, Cloud Computing, AI Prompt Engineering, Data Analytics</p>
+            <div class="info-box">
+                <label>Tools</label>
+                <p>Git, Cloud Computing, AI Prompt Engineering</p>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title">Featured <span>Projects</span></h2>
+        <h2 class="section-title">My <span>Projects</span></h2>
         <div class="projects-grid">
             <div class="project-card" data-aos="fade-up">
                 <div class="project-img"><img src="voice-auth.jpg" alt="Voice Auth"></div>
                 <div class="project-info">
-                    <h3>Voice Authentication System</h3>
-                    <p>Winner of 1st Prize at Nan Mudhalvan Hackathon. A secure healthcare authentication tool.</p>
+                    <h3>Voice Authentication</h3>
+                    <p>Voice-based security for healthcare. 1st Prize Hackathon winner.</p>
                 </div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="project-img"><img src="iot-shelf.jpg" alt="IOT"></div>
                 <div class="project-info">
                     <h3>Smart Retail Shelf</h3>
-                    <p>IoT-based inventory monitoring system using sensors and cloud data tracking.</p>
+                    <p>IoT inventory tracking system with cloud integration.</p>
                 </div>
             </div>
         </div>
@@ -161,31 +149,31 @@
         <h2 class="section-title">Experience & <span>Education</span></h2>
         <div class="contact-grid">
             <div>
-                <h3 style="margin-bottom:20px; display:flex; align-items:center; gap:10px;"><i class="fas fa-briefcase" style="color:var(--accent)"></i> Internships</h3>
-                <div class="info-box" data-aos="fade-right">
+                <h3 style="margin-bottom:20px"><i class="fas fa-briefcase"></i> Internships</h3>
+                <div class="info-box">
                     <label>1 Month</label>
-                    <h4>Java Full Stack Development</h4>
+                    <h4>Java Full Stack</h4>
                     <p>HOP Technology</p>
                 </div>
-                <div class="info-box" data-aos="fade-right">
+                <div class="info-box">
                     <label>1 Month</label>
                     <h4>Data Analytics</h4>
-                    <p>Cognifyz Internship</p>
+                    <p>Cognifyz</p>
                 </div>
             </div>
             <div>
-                <h3 style="margin-bottom:20px; display:flex; align-items:center; gap:10px;"><i class="fas fa-graduation-cap" style="color:var(--accent)"></i> Education</h3>
-                <div class="info-box" data-aos="fade-left">
+                <h3 style="margin-bottom:20px"><i class="fas fa-graduation-cap"></i> Education</h3>
+                <div class="info-box">
                     <label>2022 - 2026</label>
-                    <h4>B.E. Computer Science & Engineering</h4>
-                    <p>AVC College of Engineering, Mannampandal</p>
+                    <h4>B.E. Computer Science</h4>
+                    <p>AVC College of Engineering</p>
                 </div>
-                <div class="info-box" data-aos="fade-left">
+                <div class="info-box">
                     <label>2021 - 2022</label>
-                    <h4>HSC (Higher Secondary)</h4>
+                    <h4>HSC</h4>
                     <p>Raj Matriculation Hr. Sec. School | 72%</p>
                 </div>
-                <div class="info-box" data-aos="fade-left">
+                <div class="info-box">
                     <label>2020 - 2021</label>
                     <h4>SSLC</h4>
                     <p>Raj Matriculation Hr. Sec. School | 74%</p>
@@ -195,33 +183,21 @@
     </section>
 
     <section id="certifications">
-        <h2 class="section-title">My <span>Certifications</span></h2>
+        <h2 class="section-title">Certifications</h2>
         <div class="projects-grid">
-            <div class="info-box" data-aos="zoom-in"><h4>IBM SkillsBuild</h4><p>Prompt Engineering (2025)</p></div>
-            <div class="info-box" data-aos="zoom-in" data-aos-delay="100"><h4>Python Programming</h4><p>GUVI (IIT Madras Certified)</p></div>
-            <div class="info-box" data-aos="zoom-in" data-aos-delay="200"><h4>Cloud Computing</h4><p>Cloud Logic Technology</p></div>
-            <div class="info-box" data-aos="zoom-in" data-aos-delay="300"><h4>Introduction to AI</h4><p>Simplilearn Certified</p></div>
+            <div class="info-box"><h4>IBM SkillsBuild</h4><p>Prompt Engineering (2025)</p></div>
+            <div class="info-box"><h4>Python Programming</h4><p>GUVI (IIT Madras Certified)</p></div>
+            <div class="info-box"><h4>Cloud Computing</h4><p>Cloud Logic Technology</p></div>
+            <div class="info-box"><h4>Intro to AI</h4><p>Simplilearn</p></div>
         </div>
     </section>
 
     <section id="achievements">
         <h2 class="section-title">Awards & <span>Achievements</span></h2>
         <div class="projects-grid">
-            <div class="info-box" data-aos="fade-up">
-                <i class="fas fa-trophy" style="color: gold; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                <h4>1st Prize Winner</h4>
-                <p>Nan Mudhalvan Hackathon - Voice Authentication System.</p>
-            </div>
-            <div class="info-box" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-users" style="color: #00d2ff; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                <h4>Kho-Kho Team Leader</h4>
-                <p>Led college team to secure first place in multiple matches.</p>
-            </div>
-            <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-certificate" style="color: #a855f7; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                <h4>Technical Excellence</h4>
-                <p>Presented 5+ technical papers and attended 7+ workshops.</p>
-            </div>
+            <div class="info-box"><i class="fas fa-trophy" style="color: gold;"></i> <h4>1st Prize</h4><p>Nan Mudhalvan Hackathon</p></div>
+            <div class="info-box"><i class="fas fa-users" style="color: cyan;"></i> <h4>Team Leader</h4><p>Kho-Kho Champion</p></div>
+            <div class="info-box"><i class="fas fa-heart" style="color: pink;"></i> <h4>NSS Volunteer</h4><p>Regular Blood Donor</p></div>
         </div>
     </section>
 
@@ -241,9 +217,9 @@
                     <label>Contact</label>
                     <p>+91 8940039606</p>
                 </div>
-                <div class="social-row">
-                    <a href="https://github.com/Harjith2004" class="social-btn"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/harjith-k-839a55354" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-icon"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             
@@ -268,7 +244,7 @@
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted);">
+    <footer>
         <p>Designed by Harjith @copyright2025</p>
     </footer>
 
@@ -285,7 +261,7 @@
             themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-        // Background Animation
+        // Neural Background
         const canvas = document.getElementById('neural'), ctx = canvas.getContext('2d');
         let width, height, particles = [];
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
@@ -301,5 +277,4 @@
     </script>
 </body>
 </html>
-
 
