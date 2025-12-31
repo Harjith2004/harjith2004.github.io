@@ -1,191 +1,715 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Harjith | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harjith K | Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        :root {
+            /* --- Colors & Variables --- */
+            --bg-color: #0B1120; /* Dark Navy Background */
+            --card-bg: #151e32;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --primary: #8b5cf6; /* Violet */
+            --secondary: #ec4899; /* Pink */
+            
+            /* Gradients */
+            --gradient-text: linear-gradient(to right, #a855f7, #ec4899);
+            --gradient-box: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
+            --btn-gradient: linear-gradient(90deg, #8b5cf6, #d946ef);
+            
+            /* Borders */
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+        }
+
+        /* --- Global Reset --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+        
+        /* Background Particle Canvas */
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; pointer-events: none; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(var(--bg-color), 0.85); backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        /* Fix for header background in light/dark transition */
+        [data-theme="dark"] header { background: rgba(11, 17, 32, 0.85); }
+        [data-theme="light"] header { background: rgba(248, 250, 252, 0.85); }
+        
+        .logo { 
+            font-size: 1.5rem; font-weight: 800; color: var(--primary); 
+            text-decoration: none; letter-spacing: -0.5px;
+        }
+        
+        .nav-center { display: flex; gap: 30px; }
+        .nav-center a {
+            text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .nav-center a:hover { color: var(--primary); }
+
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .social-link { color: var(--text-muted); font-size: 1.1rem; transition: 0.3s; }
+        .social-link:hover { color: var(--primary); }
+        
+        .theme-btn {
+            background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #fbbf24;
+        }
+
+        .hamburger { display: none; font-size: 1.5rem; color: var(--text-main); cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh; padding: 0 8%;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .hero-content { max-width: 600px; }
+        
+        .badge {
+            display: inline-block; padding: 8px 16px; background: rgba(139, 92, 246, 0.1);
+            color: var(--primary); border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 800;
+        }
+        .hero h1 span {
+            background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 35px; max-width: 90%;
+        }
+        
+        .btn-group { display: flex; gap: 15px; }
+        .btn {
+            padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; cursor: pointer; transition: 0.3s; font-size: 1rem;
+        }
+        .btn-primary {
+            background: var(--btn-gradient); color: white; border: none;
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+        }
+        .btn-outline {
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+        }
+        .btn:hover { transform: translateY(-3px); }
+
+        /* Hero Right Visual (Desktop) */
+        .hero-visual {
+            position: relative; width: 450px; height: 350px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 1px solid var(--border-color); border-radius: 20px;
+            display: flex; flex-direction: column; padding: 25px; gap: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .code-line { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.1); width: 80%; }
+        .code-line.short { width: 40%; background: var(--secondary); opacity: 0.6; }
+        .code-line.long { width: 90%; }
+        .hero-visual i { position: absolute; font-size: 3rem; opacity: 0.1; bottom: 20px; right: 20px; }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 100px 8%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
+        .section-desc { color: var(--text-muted); font-size: 1rem; }
+        .highlight { color: var(--secondary); }
+
+        /* --- ABOUT ME --- */
+        .about-wrapper { display: grid; grid-template-columns: 1fr 0.8fr; gap: 60px; align-items: flex-start; }
+        .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; font-size: 1.05rem; }
+        
+        .about-cards { display: flex; flex-direction: column; gap: 20px; }
+        .feature-box {
+            background: var(--card-bg); padding: 25px; border-radius: 12px;
+            border: 1px solid var(--border-color); display: flex; align-items: flex-start; gap: 15px;
+            transition: 0.3s;
+        }
+        .feature-box:hover { border-color: var(--primary); transform: translateX(5px); }
+        .f-icon { 
+            width: 45px; height: 45px; background: rgba(139, 92, 246, 0.1); color: var(--primary);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .feature-content h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .feature-content p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- PROJECTS --- */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .project-card {
+            background: var(--card-bg); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.4s;
+        }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .p-img-container { height: 200px; background: #2d3748; overflow: hidden; position: relative; }
+        .p-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .p-content { padding: 25px; }
+        .p-tags { display: flex; gap: 10px; margin-bottom: 15px; }
+        .p-tag { font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted); }
+        .p-content h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .p-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        .p-link { color: var(--text-main); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+
+        /* --- SKILLS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .skill-card {
+            background: var(--gradient-box); border-radius: 20px; padding: 30px; color: white;
+            position: relative; overflow: hidden;
+        }
+        .skill-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .s-icon-box {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-pill {
+            background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px;
+            font-size: 0.85rem; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(5px);
+        }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #fbbf24; }
+
+        /* --- EDUCATION & CERTIFICATIONS --- */
+        .edu-wrapper, .cert-wrapper { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+        
+        .timeline-box {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden;
+        }
+        .tb-header {
+            padding: 20px 30px; border-bottom: 1px solid var(--border-color);
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .tb-title { font-size: 1.2rem; font-weight: 700; color: var(--text-main); display: flex; gap: 10px; align-items: center; }
+        .tb-meta { color: var(--text-muted); font-size: 0.9rem; display: flex; gap: 15px; align-items: center; }
+        .tb-body { padding: 25px 30px; }
+        .inst-name { 
+            background: rgba(255,255,255,0.05); display: inline-block; padding: 10px 20px; 
+            border-radius: 8px; font-weight: 600; margin-bottom: 15px; width: 100%;
+        }
+        .tb-list { list-style: none; }
+        .tb-list li {
+            position: relative; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 8px; line-height: 1.5;
+        }
+        .tb-list li::before {
+            content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: var(--primary); border-radius: 50%;
+        }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 50px;
+        }
+        .contact-left h3 { font-size: 1.8rem; margin-bottom: 30px; }
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .icon-sq {
+            width: 50px; height: 50px; background: var(--gradient-box); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem;
+        }
+        .socials { display: flex; gap: 15px; margin-top: 40px; }
+        .soc-btn {
+            width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; color: var(--text-main);
+            text-decoration: none; transition: 0.3s;
+        }
+        .soc-btn.blue { background: #0077b5; color: white; } /* LinkedIn Color */
+        .soc-btn:hover { transform: scale(1.1); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-field {
+            width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            border-radius: 10px; color: var(--text-main); font-size: 1rem;
+        }
+        .form-field:focus { outline: none; border-color: var(--primary); }
+        /* Label styling for form */
+        label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: -15px; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+        footer i { color: var(--secondary); margin: 0 5px; }
+
+        /* --- MOBILE MENU --- */
+        .mobile-menu {
+            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+            background: var(--bg-color); z-index: 999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 2rem; transition: 0.4s;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { font-size: 1.5rem; color: var(--text-main); text-decoration: none; font-weight: 700; }
+        .close-menu { position: absolute; top: 25px; right: 8%; font-size: 2rem; cursor: pointer; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 968px) {
+            .nav-center, .nav-right { display: none; }
+            .hamburger { display: block; }
+            
+            /* Vertical Layout for Mobile */
+            .hero { flex-direction: column; text-align: left; padding-top: 150px; gap: 50px; align-items: flex-start; }
+            .hero-content { max-width: 100%; }
+            .hero-visual { display: none; } /* Hide code visual on mobile */
+            
+            .about-wrapper { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; padding: 30px; }
+            
+            .btn-group { flex-wrap: wrap; }
+            .tb-meta { flex-wrap: wrap; gap: 10px; }
+        }
+    </style>
 </head>
+<body data-theme="dark">
 
-<body>
+    <canvas id="neural"></canvas>
 
-<!-- NAVBAR -->
-<header>
-  <div class="logo">Portfolio</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="icons">
-    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="mailto:yourmail@gmail.com"><i class="fas fa-envelope"></i></a>
-  </div>
-</header>
+    <header>
+        <a href="#" class="logo">Portfolio</a>
+        
+        <nav class="nav-center">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <div class="hero-text">
-    <span class="badge">Full Stack Developer</span>
-    <h1>Hi, I'm <span>Harjith</span></h1>
-    <p>
-      Crafting secure and scalable web applications <br />
-      with modern technologies and clean UI design.
-    </p>
+        <div class="nav-right">
+            <button class="theme-btn" id="theme-toggle"><i class="fas fa-sun"></i></button>
+            <a href="https://github.com/Harjith2004" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/harjith-k-839a55354" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:harjithharjith40711@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+        </div>
 
-    <div class="buttons">
-      <a href="#projects" class="btn primary">View My Work</a>
-      <a href="assets/resume.pdf" class="btn secondary" download>Download CV</a>
-    </div>
-  </div>
+        <div class="hamburger" id="menu-btn"><i class="fas fa-bars"></i></div>
+    </header>
 
-  <div class="hero-img">
-    <img src="assets/profile.svg" alt="developer illustration" />
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="about">
-  <div class="about-text">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate and ambitious Computer Science Engineering student
-      with a strong interest in full-stack development and secure systems.
-      I enjoy building responsive, user-friendly applications and constantly
-      improving my technical and problem-solving skills.
-    </p>
-
-    <p>
-      I won <strong>1st Prize</strong> in the Nan Mudhalvan Hackathon for developing
-      a <strong>Voice-Based Authentication System</strong>.
-    </p>
-  </div>
-
-  <div class="about-cards">
-    <div class="card">
-      <i class="fas fa-code"></i>
-      <h3>Full Stack</h3>
-      <p>End-to-end application development</p>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="close-menu" id="close-menu">&times;</div>
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#skills" onclick="closeMenu()">Skills</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+        <div style="margin-top: 20px;">
+            <button class="theme-btn" id="mobile-theme-toggle" style="font-size: 2rem;"><i class="fas fa-sun"></i></button>
+        </div>
     </div>
 
-    <div class="card">
-      <i class="fas fa-rocket"></i>
-      <h3>Performance</h3>
-      <p>Optimized & scalable solutions</p>
-    </div>
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-right">
+            <span class="badge">Full Stack Developer</span>
+            <h1>Hi, I'm <span>Harjith</span></h1>
+            <p>Crafting exceptional digital experiences with modern web technologies. I build scalable, secure, and user-centric applications.</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="Harjith_Resume.pdf" download class="btn btn-outline">Download CV</a>
+            </div>
+        </div>
+        
+        <div class="hero-visual" data-aos="fade-left">
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+                <div style="width:12px; height:12px; background:#ef4444; border-radius:50%"></div>
+                <div style="width:12px; height:12px; background:#f59e0b; border-radius:50%"></div>
+                <div style="width:12px; height:12px; background:#22c55e; border-radius:50%"></div>
+            </div>
+            <div class="code-line long"></div>
+            <div class="code-line"></div>
+            <div class="code-line short"></div>
+            <div class="code-line long" style="margin-top:20px"></div>
+            <div class="code-line"></div>
+            <i class="fas fa-code"></i>
+        </div>
+    </section>
 
-    <div class="card">
-      <i class="fas fa-users"></i>
-      <h3>Collaboration</h3>
-      <p>Effective team communication</p>
-    </div>
-  </div>
-</section>
+    <section id="about">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title"><span class="highlight">About</span> Me</h2>
+        </div>
+        <div class="about-wrapper">
+            <div class="about-text" data-aos="fade-right">
+                <p>I am a passionate and ambitious third-year Bachelor of Computer Science and Engineering student with a strong interest in full-stack development and cloud computing. My goal is to become a successful full-stack developer, creating dynamic, scalable, and user-focused applications that make a meaningful impact.</p>
+                <p>I am actively building my expertise in both front-end and back-end technologies, working with tools and frameworks like React, Node.js, Express.js, and MongoDB. Alongside my web development skills, I am also expanding my knowledge in cloud platforms and services.</p>
+            </div>
+            <div class="about-cards" data-aos="fade-left">
+                <div class="feature-box">
+                    <div class="f-icon"><i class="fas fa-code"></i></div>
+                    <div class="feature-content">
+                        <h4>Full Stack</h4>
+                        <p>End-to-end application development</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="f-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="feature-content">
+                        <h4>Performance</h4>
+                        <p>Optimized and scalable solutions</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <div class="f-icon"><i class="fas fa-users"></i></div>
+                    <div class="feature-content">
+                        <h4>Collaboration</h4>
+                        <p>Effective team player and communicator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="projects">
-  <h2>Featured Projects</h2>
+    <section id="projects">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+            <p class="section-desc">Here are some of my recent projects that showcase my development skills</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card" data-aos="fade-up">
+                <div class="p-img-container">
+                    <img src="voice-auth.jpg" alt="Voice Auth Project">
+                </div>
+                <div class="p-content">
+                    <div class="p-tags">
+                        <span class="p-tag">React</span>
+                        <span class="p-tag">Node.js</span>
+                        <span class="p-tag">Tailwind</span>
+                    </div>
+                    <h3>Voice Authentication System</h3>
+                    <p>Secure identity verification for healthcare. Winner of Nan Mudhalvan Hackathon.</p>
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container">
+                    <img src="iot-shelf.jpg" alt="IoT Project">
+                </div>
+                <div class="p-content">
+                    <div class="p-tags">
+                        <span class="p-tag">IoT</span>
+                        <span class="p-tag">Python</span>
+                        <span class="p-tag">Cloud</span>
+                    </div>
+                    <h3>Smart Retail Shelf</h3>
+                    <p>IoT-based inventory monitoring system using cloud sensors.</p>
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="project-grid">
-    <div class="project-card">
-      <img src="assets/project1.jpg" />
-      <h3>Voice Authentication System</h3>
-      <p>Secure login system using voice recognition for healthcare.</p>
-    </div>
+    <section id="skills">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Skills & <span class="highlight">Expertise</span></h2>
+            <p class="section-desc">A comprehensive overview of my technical skills</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="zoom-in">
+                <div class="skill-header">
+                    <div class="s-icon-box"><i class="fas fa-code"></i></div>
+                    <h3>Frontend</h3>
+                </div>
+                <div class="skill-tags">
+                    <div class="skill-pill"><div class="dot"></div> React.js</div>
+                    <div class="skill-pill"><div class="dot"></div> HTML/CSS</div>
+                    <div class="skill-pill"><div class="dot"></div> Tailwind</div>
+                    <div class="skill-pill"><div class="dot"></div> Bootstrap</div>
+                </div>
+            </div>
 
-    <div class="project-card">
-      <img src="assets/project2.jpg" />
-      <h3>Portfolio Website</h3>
-      <p>Modern responsive personal portfolio using HTML, CSS & JS.</p>
-    </div>
-  </div>
-</section>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="skill-header">
+                    <div class="s-icon-box"><i class="fas fa-server"></i></div>
+                    <h3>Backend</h3>
+                </div>
+                <div class="skill-tags">
+                    <div class="skill-pill"><div class="dot"></div> Node.js</div>
+                    <div class="skill-pill"><div class="dot"></div> Express.js</div>
+                    <div class="skill-pill"><div class="dot"></div> MongoDB</div>
+                    <div class="skill-pill"><div class="dot"></div> SQL</div>
+                </div>
+            </div>
 
-<!-- SKILLS -->
-<section id="skills" class="skills">
-  <h2>Skills & Expertise</h2>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="skill-header">
+                    <div class="s-icon-box"><i class="fas fa-terminal"></i></div>
+                    <h3>DevOps</h3>
+                </div>
+                <div class="skill-tags">
+                    <div class="skill-pill"><div class="dot"></div> Docker</div>
+                    <div class="skill-pill"><div class="dot"></div> AWS</div>
+                    <div class="skill-pill"><div class="dot"></div> Git</div>
+                    <div class="skill-pill"><div class="dot"></div> Linux</div>
+                </div>
+            </div>
 
-  <div class="skill-grid">
-    <div class="skill-box">
-      <h3>Frontend</h3>
-      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span>
-    </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="skill-header">
+                    <div class="s-icon-box"><i class="fas fa-globe"></i></div>
+                    <h3>Tools</h3>
+                </div>
+                <div class="skill-tags">
+                    <div class="skill-pill"><div class="dot"></div> VS Code</div>
+                    <div class="skill-pill"><div class="dot"></div> Postman</div>
+                    <div class="skill-pill"><div class="dot"></div> Canva</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="skill-box">
-      <h3>Backend</h3>
-      <span>Java</span><span>Node.js</span><span>MySQL</span>
-    </div>
+    <section id="education">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Education & <span class="highlight">Certifications</span></h2>
+        </div>
+        
+        <div class="edu-wrapper">
+            <div class="timeline-box" data-aos="fade-up">
+                <div class="tb-header">
+                    <div class="tb-title"><i class="fas fa-graduation-cap highlight"></i> Bachelor of Computer Science Engineering</div>
+                    <div class="tb-meta">
+                        <span><i class="far fa-calendar"></i> 2022 - 2026</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Mannampandal</span>
+                        <span class="highlight">7.23 CGPA</span>
+                    </div>
+                </div>
+                <div class="tb-body">
+                    <div class="inst-name">AVC College of Engineering</div>
+                    <ul class="tb-list">
+                        <li>Attended more than 7 paper presentations</li>
+                        <li>Active participation in technical events</li>
+                        <li>Focused on web development and software engineering</li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="skill-box">
-      <h3>Tools</h3>
-      <span>Git</span><span>GitHub</span><span>VS Code</span>
-    </div>
+            <div class="timeline-box" data-aos="fade-up">
+                <div class="tb-header">
+                    <div class="tb-title"><i class="fas fa-school highlight"></i> Higher Secondary Education</div>
+                    <div class="tb-meta">
+                        <span><i class="far fa-calendar"></i> 2020 - 2021</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Mayiladuthurai</span>
+                        <span class="highlight">81%</span>
+                    </div>
+                </div>
+                <div class="tb-body">
+                    <div class="inst-name">Raj Matriculation School</div>
+                    <ul class="tb-list">
+                        <li>Excellent academic performance</li>
+                        <li>Participated in extracurricular activities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div class="skill-box">
-      <h3>Other</h3>
-      <span>Problem Solving</span><span>API Integration</span>
-    </div>
-  </div>
-</section>
+        <div class="cert-wrapper" style="margin-top: 30px;">
+             <h3 style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Certifications</h3>
+             
+             <div class="timeline-box" data-aos="fade-up">
+                <div class="tb-header">
+                    <div class="tb-title"><i class="fas fa-certificate highlight"></i> Full Stack Development Certification</div>
+                    <div class="tb-meta">
+                        <span><i class="far fa-calendar"></i> Completed August 2024</span>
+                        <span><i class="fas fa-globe"></i> Online</span>
+                    </div>
+                </div>
+                <div class="tb-body">
+                    <div class="inst-name">Meta (Coursera)</div>
+                    <ul class="tb-list">
+                        <li>Comprehensive training in full-stack development</li>
+                        <li>Hands-on experience with modern web technologies</li>
+                        <li>Built multiple web applications during the course</li>
+                    </ul>
+                </div>
+            </div>
 
-<!-- EDUCATION -->
-<section id="education" class="education">
-  <h2>Education</h2>
+            <div class="timeline-box" data-aos="fade-up">
+                <div class="tb-header">
+                    <div class="tb-title"><i class="fas fa-award highlight"></i> TCS iON Career Edge Certification</div>
+                    <div class="tb-meta">
+                        <span><i class="far fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-globe"></i> Online</span>
+                    </div>
+                </div>
+                <div class="tb-body">
+                    <div class="inst-name">TCS iON</div>
+                    <ul class="tb-list">
+                        <li>Professional communication skills</li>
+                        <li>Corporate etiquette and workplace readiness</li>
+                        <li>Industry-specific knowledge and best practices</li>
+                    </ul>
+                </div>
+            </div>
+         </div>
+    </section>
 
-  <div class="edu-card">
-    <h3>B.E Computer Science Engineering</h3>
-    <p>2022 – 2026 | AVC College of Engineering</p>
-    <p>CGPA: 7.59</p>
-  </div>
+    <section id="contact">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Let's <span class="highlight">Connect</span></h2>
+            <p class="section-desc">Have a project in mind? Let's discuss how we can work together.</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-left" data-aos="fade-right">
+                <h3>Get in Touch</h3>
+                
+                <div class="info-item">
+                    <div class="icon-sq"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <span style="display:block; font-size:0.8rem; color:var(--text-muted)">Email</span>
+                        <span style="font-weight:600">harjithharjith40711@gmail.com</span>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-sq"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <span style="display:block; font-size:0.8rem; color:var(--text-muted)">Location</span>
+                        <span style="font-weight:600">Mayiladuthurai, Tamil Nadu</span>
+                    </div>
+                </div>
 
-  <div class="edu-card">
-    <h3>Higher Secondary Education</h3>
-    <p>2020 – 2021 | Raj Matriculation School</p>
-    <p>81%</p>
-  </div>
+                <div class="socials">
+                    <a href="https://github.com/Harjith2004" class="soc-btn"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/harjith-k-839a55354" class="soc-btn blue"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
 
-  <h2>Certifications</h2>
+            <div class="contact-right" data-aos="fade-left">
+                <form action="https://formspree.io/f/harjithharjith40711@gmail.com" method="POST" class="contact-form">
+                    <div style="display:flex; flex-direction:column; gap:5px">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-field" placeholder="Your name" required>
+                    </div>
+                    
+                    <div style="display:flex; flex-direction:column; gap:5px">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-field" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div style="display:flex; flex-direction:column; gap:5px">
+                        <label>Message</label>
+                        <textarea name="message" rows="5" class="form-field" placeholder="Your message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-  <div class="edu-card">
-    <h3>Full Stack Development</h3>
-    <p>Meta (Coursera)</p>
-    <ul>
-      <li>Frontend & Backend fundamentals</li>
-      <li>Hands-on project experience</li>
-      <li>Modern web technologies</li>
-    </ul>
-  </div>
-</section>
+    <footer>
+        <p>Made by <i class="fas fa-heart"></i> Harjith K</p>
+    </footer>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
-  <h2>Let's Connect</h2>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        /* Initialize Scroll Animation */
+        AOS.init({ duration: 800, once: true });
 
-  <div class="contact-grid">
-    <div class="contact-info">
-      <p><i class="fas fa-envelope"></i> yourmail@gmail.com</p>
-      <p><i class="fas fa-map-marker-alt"></i> Tamil Nadu, India</p>
-    </div>
+        /* --- Mobile Menu Logic --- */
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
 
-    <form>
-      <input type="text" placeholder="Your Name" />
-      <input type="email" placeholder="Your Email" />
-      <textarea placeholder="Your Message"></textarea>
-      <button>Send Message</button>
-    </form>
-  </div>
-</section>
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
 
-<footer>
-  Made with ❤️ by Harjith
-</footer>
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
 
-<script src="script.js"></script>
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+        }
+
+        /* --- Theme Toggle Logic --- */
+        const themeToggles = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+        const body = document.body;
+
+        themeToggles.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                body.setAttribute('data-theme', nextTheme);
+                
+                // Update icons on both buttons
+                themeToggles.forEach(b => {
+                    b.innerHTML = nextTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                });
+            });
+        });
+
+        /* --- Neural Background Animation --- */
+        const canvas = document.getElementById('neural');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.onresize = resize;
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = Math.random() * 0.5 - 0.25; // Random velocity X
+                this.vy = Math.random() * 0.5 - 0.25; // Random velocity Y
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+        }
+        
+        // Create 60 particles
+        for(let i=0; i<60; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0,0,width,height);
+            
+            // Set particle color based on theme logic (purple default)
+            ctx.fillStyle = '#8b5cf6';
+            ctx.strokeStyle = '#8b5cf6';
+            
+            particles.forEach(p => {
+                p.update();
+                // Draw dot
+                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                
+                // Draw connecting lines
+                particles.forEach(p2 => {
+                    let d = Math.hypot(p.x-p2.x, p.y-p2.y);
+                    if(d < 100) {
+                        ctx.globalAlpha = (1 - d/100) * 0.3; // Fade out based on distance
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                        ctx.globalAlpha = 1;
+                    }
+                });
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
+
+
