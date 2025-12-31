@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #0f172a, #1e1b4b);
+  color: white;
+}
+
+/* NAVBAR */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+}
+
+nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 60px;
+}
+
+.hero h1 span {
+  color: #a855f7;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.primary {
+  background: linear-gradient(90deg,#9333ea,#ec4899);
+  color: white;
+}
+
+.secondary {
+  border: 1px solid #fff;
+  color: white;
+}
+
+/* SECTIONS */
+section {
+  padding: 80px 60px;
+}
+
+.project-grid, .skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+}
+
+.project-card, .skill-box, .edu-card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  opacity: 0.7;
+}
+
+/* MOBILE */
+@media(max-width:768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
