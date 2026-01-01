@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
     <style>
         :root {
@@ -39,6 +38,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
         body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
         
+        /* Neural Background */
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; pointer-events: none; }
 
         /* HEADER */
@@ -49,46 +49,38 @@
             border-bottom: 1px solid var(--border-color);
         }
         
-        /* Updated Logo Text */
-        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--text-main); }
+        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--primary); }
         
-        /* Desktop Navigation */
-        .nav-center { display: flex; gap: 25px; align-items: center; }
-        .nav-center a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
-        .nav-center a:hover { color: var(--primary); }
+        /* Navigation Container */
+        .nav-container { display: flex; align-items: center; gap: 30px; }
 
-        .nav-right { display: flex; align-items: center; gap: 15px; }
-        .theme-btn { background: none; border: 1px solid var(--border-color); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .theme-btn { background: none; border: 1px solid var(--border-color); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .theme-btn:hover { background: rgba(255,255,255,0.1); }
 
-        /* Mobile Menu Button */
-        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); margin-left: 15px; }
-
-        /* Mobile Menu Overlay */
-        .mobile-menu {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: var(--bg-color); z-index: 999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            gap: 2rem; transition: 0.4s;
-        }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu a { font-size: 1.5rem; color: var(--text-main); text-decoration: none; font-weight: 700; }
-        .mobile-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; }
+        /* Hamburger for Mobile */
+        .hamburger { display: none; font-size: 1.5rem; color: var(--text-main); cursor: pointer; }
 
         section { padding: 100px 8%; }
         .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 50px; text-align: center; }
         .section-title span { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* HERO SECTION */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 120px; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 100px; }
         .hero h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; margin-bottom: 10px; }
         
-        /* Typing Text Color */
+        /* Typing Effect */
         .typing-text { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .cursor { display: inline-block; width: 3px; background-color: var(--text-main); animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .hero-subtitle { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 20px; }
         .hero p { max-width: 700px; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; }
         
+        /* Hero Buttons */
         .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
         .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: transform 0.2s; display: flex; align-items: center; gap: 8px; }
         .btn:hover { transform: translateY(-3px); }
@@ -108,7 +100,6 @@
         /* SKILLS (Gradient Cards) */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .skill-card { padding: 30px; border-radius: 20px; color: white; position: relative; overflow: hidden; }
-        
         .sk-frontend { background: var(--grad-1); }
         .sk-backend { background: var(--grad-2); }
         .sk-devops { background: var(--grad-3); }
@@ -134,7 +125,7 @@
         .info-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border-color); margin-bottom: 20px; }
         .year-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; background: rgba(139, 92, 246, 0.1); color: var(--primary); font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; }
         
-        /* CERTIFICATIONS */
+        /* CERTIFICATIONS & AWARDS */
         .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .cert-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border-color); }
         
@@ -152,14 +143,20 @@
         .send-btn { width: 100%; padding: 15px; background: #06b6d4; color: #000; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
         .send-btn:hover { background: #0891b2; }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-center { display: none; } /* Hides desktop links */
-            .hamburger { display: block; } /* Shows mobile menu icon */
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); font-size: 0.9rem; margin-top: 50px; }
+
+        /* MOBILE MENU */
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: var(--bg-color); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: 0.4s; }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { font-size: 1.5rem; color: var(--text-main); text-decoration: none; font-weight: 700; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
             .exp-edu-wrapper, .contact-container { grid-template-columns: 1fr; }
             .hero-btns { flex-direction: column; width: 100%; }
             .btn { width: 100%; justify-content: center; }
-            section { padding: 60px 5%; }
         }
     </style>
 </head>
@@ -170,34 +167,34 @@
     <header>
         <a href="#" class="logo">Portfolio</a>
         
-        <nav class="nav-center">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="nav-right">
+        <div class="nav-container">
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
             <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
+            
             <div class="hamburger" id="menu-btn"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
     <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-close" onclick="closeMenu()">&times;</div>
         <a href="#home" onclick="closeMenu()">Home</a>
         <a href="#about" onclick="closeMenu()">About</a>
         <a href="#skills" onclick="closeMenu()">Skills</a>
         <a href="#projects" onclick="closeMenu()">Projects</a>
-        <a href="#certifications" onclick="closeMenu()">Certifications</a>
         <a href="#achievements" onclick="closeMenu()">Achievements</a>
         <a href="#contact" onclick="closeMenu()">Contact</a>
     </div>
 
     <section id="home" class="hero">
         <div data-aos="zoom-in">
-            <h1>Hi, I'm <span class="typing-text"></span></h1>
+            <h1>Hi, I'm <br><span class="typing-text" id="typewriter"></span><span class="cursor">&nbsp;</span></h1>
             <div class="hero-subtitle">Software Engineer | Full Stack Developer</div>
             <p>B.E. Computer Science student specializing in Java, Python, and Full Stack technologies. Building scalable web applications with a passion for clean code and innovative solutions.</p>
             
@@ -351,28 +348,28 @@
         <div class="projects-grid">
             <div class="info-card" data-aos="fade-up">
                 <i class="fas fa-trophy" style="color: gold; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                <h4>Hackathon Winner</h4>
-                <p>1st Prize - Nan Mudhalvan Hackathon for Voice Authentication System.</p>
+                <h4>1st Prize Winner</h4>
+                <p>Nan Mudhalvan Hackathon - Voice Authentication System.</p>
             </div>
             <div class="info-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-shield-alt" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px;"></i>
-                <h4>Project Excellence</h4>
-                <p>Designed secure software solutions for data protection and user privacy.</p>
-            </div>
-            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-users" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 10px;"></i>
                 <h4>Kho-Kho Team Leader</h4>
-                <p>Led team to victory in multiple tournaments, securing first place finishes.</p>
+                <p>Led college team to secure first place in multiple matches.</p>
             </div>
-            <div class="info-card" data-aos="fade-up">
-                <i class="fas fa-file-alt" style="color: #ec4899; font-size: 1.5rem; margin-bottom: 10px;"></i>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-file-alt" style="color: #a855f7; font-size: 1.5rem; margin-bottom: 10px;"></i>
                 <h4>Technical Growth</h4>
-                <p>Attended 5+ technical papers and 7+ specialized workshops.</p>
+                <p>Presented 5+ technical papers and attended 7+ specialized workshops.</p>
             </div>
-            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-card" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-hands-helping" style="color: #ef4444; font-size: 1.5rem; margin-bottom: 10px;"></i>
                 <h4>NSS Volunteer</h4>
                 <p>Active regular blood donor and committed community service member.</p>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-shield-alt" style="color: #10b981; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                <h4>Project Excellence</h4>
+                <p>Designed secure software solutions for data protection and user privacy.</p>
             </div>
         </div>
     </section>
@@ -428,15 +425,29 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // Typing Animation
-        var typed = new Typed('.typing-text', {
-            strings: ['Harjith K', 'a Developer', 'a Coder'],
-            typeSpeed: 100,
-            backSpeed: 60,
-            loop: true
-        });
+        // Typing Effect Logic
+        const textElement = document.getElementById('typewriter');
+        const textToType = "Harjith K";
+        let index = 0;
 
-        // Theme Toggle
+        function typeEffect() {
+            if (index < textToType.length) {
+                textElement.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(typeEffect, 150); // Speed of typing
+            }
+        }
+        // Start typing after a short delay
+        setTimeout(typeEffect, 500);
+
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.onclick = () => mobileMenu.classList.toggle('active');
+        function closeMenu() { mobileMenu.classList.remove('active'); }
+
+        // Theme Toggle Logic
         const themeBtn = document.getElementById('theme-btn');
         const body = document.body;
         themeBtn.addEventListener('click', () => {
@@ -445,13 +456,7 @@
             themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-        // Mobile Menu Logic
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.onclick = () => mobileMenu.classList.add('active');
-        function closeMenu() { mobileMenu.classList.remove('active'); }
-
-        // Neural Background
+        // Neural Background Animation
         const canvas = document.getElementById('neural'), ctx = canvas.getContext('2d');
         let width, height, particles = [];
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
